@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, FlatList, Button } from 'react-native';
+import { ScrollView, StyleSheet, Text, FlatList, Button, View } from 'react-native';
 import api from '../apis/usgs';
 
 export default class EarthquakesScreen extends React.Component {
@@ -13,10 +13,11 @@ export default class EarthquakesScreen extends React.Component {
     });
   }
 
-  renderItem = ({item})=><Button 
-  style={styles.item} 
-  title={item.properties.title} 
-  onPress={()=>this.props.navigation.navigate('EarthquakeDetails',{earthquake:item})}/>
+  renderItem = ({item})=><View style={styles.item}>
+      <Text style={styles.headings}
+            onPress={()=>this.props.navigation.navigate('EarthquakeDetails',{earthquake:item})}>{item.properties.title}
+      </Text>
+    </View>
   
   render(){
     return (
@@ -40,7 +41,15 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
-  items:{
-    height: 20
+  item:{
+    height: 50,
+    borderStyle:'solid',
+    borderWidth: 1,
+    borderColor:'#c6c8ca',
+    backgroundColor: '#6c757d',
+    justifyContent: 'center'
+  },
+  headings:{
+    fontSize: 18,
   }
 });
